@@ -6,13 +6,13 @@ import (
 	"strings"
 )
 
-func check_domain(url string) (string, error) {
+func check_domain(url string) (string, *http.Response, error) {
 	resp, err := http.Get(url)
 	if err != nil {
-		return "", err
+		return "", resp, err
 	}
 	domain := resp.Request.URL.Host
-	return domain, nil
+	return domain, resp, nil
 }
 
 func check_correct_service(domain string) (string, string, error) {
